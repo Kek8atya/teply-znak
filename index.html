@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тёплый знак — авторские открытки и сборник анекдотов</title>
+<meta name="description" content="Авторские открытки и сборник анекдотов. Открытка — 1 500 ₽, сборник — 1 100 ₽. Доставка по России через Ozon.">
+<meta name="theme-color" content="#FFEF00">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<!-- TODO(seo): поменять адрес, если сайт переедет на свой домен -->
+<link rel="canonical" href="https://kek8atya.github.io/teply-znak/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Тёплый знак">
+<meta property="og:description" content="Авторские открытки и сборник анекдотов">
+<meta property="og:url" content="https://kek8atya.github.io/teply-znak/">
+<meta property="og:image" content="https://kek8atya.github.io/teply-znak/assets/img/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- TODO(analytics): сюда вставить код Яндекс Метрики и VK Пикселя -->
+<style>
+/* ===== Палитра и базовые настройки ===== */
+:root {
+  --bg: #FFFFFF;
+  --ink: #111111;
+  --muted: #5C5C5C;
+  --line: #E6E6E3;
+  --plate: #F4F3F0;          /* нейтральная подложка под товарами */
+  --yellow: #FFEF00;         /* цвет логотипа */
+  --red: #DA251C;            /* кнопки и цены, белый текст на нём — 4.9:1 */
+  --red-dark: #B51C14;
+  --focus: #2340D9;
+  --wrap: 1160px;
+  --gut: 20px;
+  --radius: 8px;
+  --font: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html:has(dialog[open]) { overflow: hidden; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--font); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+:where(a, button, input, textarea, summary):focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--gut); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 10; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 6px; text-decoration: none; }
+.skip:focus { top: 12px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: inherit; }
+
+/* ===== Кнопки ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 28px; border: 0; border-radius: var(--radius);
+  background: var(--red); color: #fff; font: 600 16px/1 var(--font);
+  cursor: pointer; text-decoration: none; transition: background-color .15s;
+}
+.btn:hover { background: var(--red-dark); }
+.btn.is-added { background: var(--ink); }
+.btn--wide { width: 100%; }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: #fff; }
+
+/* ===== Шапка ===== */
+.header { background: var(--yellow); }
+.header__logo { display: block; width: fit-content; margin: 0 auto; padding: 20px 0 12px; }
+.header__logo img { width: 112px; height: 112px; }
+.nav { border-top: 1px solid rgba(17, 17, 17, .14); }
+.nav ul { list-style: none; margin: 0 auto; padding: 10px var(--gut); max-width: var(--wrap); display: flex; flex-wrap: wrap; justify-content: center; gap: 0 28px; }
+.nav a { display: inline-block; padding: 10px 2px; text-decoration: none; font-weight: 500; }
+.nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+/* ===== Вступление ===== */
+.intro { padding: 72px 0 8px; text-align: center; }
+.intro h1 { margin: 0 auto; max-width: 25em; font-size: clamp(22px, 1.6vw + 15px, 32px); font-weight: 400; line-height: 1.35; }
+
+/* ===== Секции ===== */
+.section { padding: 80px 0; }
+.section + .section { border-top: 1px solid var(--line); }
+.section__title { margin: 0 0 32px; text-align: center; font-size: clamp(26px, 1.5vw + 19px, 36px); font-weight: 700; line-height: 1.2; }
+.section__text { max-width: 660px; margin: 0 auto; text-align: center; font-size: 18px; }
+.section__text p { margin: 0; }
+
+/* ===== Каталог ===== */
+.catalog { padding-top: 56px; }
+.grid { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 64px 40px; }
+.card { flex: 0 1 calc((100% - 80px) / 3); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.card__media { display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 0; border-radius: var(--radius); background: var(--plate); overflow: hidden; cursor: zoom-in; }
+.card__media img { width: 100%; height: 100%; object-fit: contain; padding: 9%; transition: transform .3s ease; }
+.card__media--photo img { padding: 0; }   /* «Котики» — фото открытки, у него уже есть свой фон */
+.card__media:hover img { transform: scale(1.03); }
+.card__title { margin: 22px 0 6px; font-size: 20px; font-weight: 700; line-height: 1.25; }
+.card__title .linkbtn:hover { text-decoration: underline; text-underline-offset: 4px; }
+.card__text { margin: 0 0 14px; max-width: 30em; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.card__buy { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.card__price { margin: 0; color: var(--red); font-size: 19px; font-weight: 600; }
+.card .btn { min-width: 190px; }
+
+/* ===== Доставка и оплата ===== */
+.info3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 980px; margin: 0 auto; text-align: center; }
+.info3 h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; }
+.info3 p { margin: 0; color: var(--muted); }
+
+/* ===== Контакты ===== */
+.contacts { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 56px; text-align: center; }
+.contacts span { display: block; color: var(--muted); font-size: 15px; }
+.contacts a { font-size: 20px; font-weight: 600; text-decoration: none; }
+.contacts a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ===== FAQ ===== */
+.faq { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { position: relative; list-style: none; cursor: pointer; padding: 20px 44px 20px 0; font-size: 18px; font-weight: 600; line-height: 1.35; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 6px; top: 50%; transform: translateY(-52%); font-size: 28px; font-weight: 300; line-height: 1; }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin: 0 0 22px; color: var(--muted); max-width: 64ch; }
+
+/* ===== Подвал ===== */
+.footer { background: var(--yellow); padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px)); text-align: center; font-size: 15px; }
+.footer img { width: 56px; height: 56px; margin: 0 auto 10px; }
+.footer p { margin: 4px 0; }
+.footer__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 24px; }
+.footer__links .linkbtn { padding: 8px 0; text-decoration: underline; text-underline-offset: 4px; }
+
+/* ===== Плавающая корзина ===== */
+.fab {
+  position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 5;
+  width: 64px; height: 64px; border: 0; border-radius: 50%; background: var(--ink); color: #fff; cursor: pointer;
+  display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+}
+.fab[hidden] { display: none; }
+.fab svg { width: 26px; height: 26px; }
+.fab__count { position: absolute; top: -2px; right: -2px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: var(--red); color: #fff; font: 600 13px/24px var(--font); }
+.fab.is-bump { animation: bump .35s ease; }
+@keyframes bump { 40% { transform: scale(1.15); } }
+
+/* ===== Окна (товар, корзина, документы) ===== */
+dialog { border: 0; padding: 0; color: var(--ink); background: #fff; max-width: none; max-height: none; }
+dialog::backdrop { background: rgba(17, 17, 17, .5); }
+.close { position: sticky; top: 10px; z-index: 2; width: 44px; height: 44px; margin: 10px 10px -54px auto; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); cursor: pointer; display: grid; place-items: center; }
+.close svg { width: 20px; height: 20px; }
+
+.modal { width: min(980px, calc(100% - 32px)); max-height: calc(100dvh - 32px); border-radius: 12px; overflow: auto; }
+.modal[open] { animation: rise .22s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+.pmodal { display: grid; grid-template-columns: 1fr 1fr; }
+.pmodal__media { background: var(--plate); display: grid; place-items: center; padding: 32px; }
+.pmodal__media img { width: 100%; max-height: calc(100dvh - 120px); object-fit: contain; }
+.pmodal__media--photo { padding: 0; }
+.pmodal__info { padding: 48px 40px 40px; }
+.pmodal__type { margin: 0 0 6px; color: var(--muted); font-size: 15px; }
+.pmodal__title { margin: 0 0 10px; font-size: clamp(26px, 2vw + 16px, 36px); line-height: 1.15; }
+.pmodal__price { margin: 0 0 20px; color: var(--red); font-size: 22px; font-weight: 600; }
+.pmodal__desc p { margin: 0 0 14px; }
+.pmodal .btn { margin-top: 12px; min-width: 220px; }
+
+.panel { margin: 0 0 0 auto; width: min(460px, 100%); height: 100dvh; overflow: auto; }
+.panel[open] { animation: slide .25s ease-out; }
+@keyframes slide { from { opacity: 0; transform: translateX(32px); } }
+.panel__head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 12px; padding: 14px 64px 14px 20px; background: var(--yellow); }
+.panel__head img { width: 40px; height: 40px; }
+.panel__head h2 { margin: 0; font-size: 22px; }
+.panel__head .close { position: absolute; margin: 0; top: 50%; right: 10px; transform: translateY(-50%); background: transparent; }
+.panel__body { padding: 8px 20px 32px; }
+.lines { list-style: none; margin: 0; padding: 0; }
+.line { display: grid; grid-template-columns: 56px 1fr auto; gap: 4px 14px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.line__img { grid-row: span 2; width: 56px; height: 70px; border-radius: 6px; background: var(--plate); object-fit: contain; padding: 4px; }
+.line__title { margin: 0; font-weight: 600; line-height: 1.3; }
+.line__price { margin: 0; color: var(--muted); font-size: 15px; }
+.line__remove { grid-row: 1; grid-column: 3; justify-self: end; color: var(--muted); font-size: 14px; text-decoration: underline; text-underline-offset: 3px; padding: 6px 0; }
+.qty { grid-column: 2 / 4; display: flex; align-items: center; gap: 0; width: fit-content; border: 1.5px solid var(--line); border-radius: 8px; }
+.qty button { width: 44px; height: 40px; border: 0; background: none; font: 500 20px/1 var(--font); cursor: pointer; }
+.qty button:disabled { color: #B8B8B8; cursor: default; }
+.qty output { min-width: 28px; text-align: center; font-weight: 600; }
+.sum { display: flex; justify-content: space-between; align-items: baseline; margin: 20px 0 4px; font-size: 20px; font-weight: 700; }
+.note { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
+.empty { padding: 40px 0; text-align: center; }
+.empty p { margin: 0 0 20px; font-size: 18px; }
+
+.order { margin-top: 28px; }
+.order h3 { margin: 0 0 16px; font-size: 20px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 500; }
+.field input, .field textarea { width: 100%; min-height: 48px; padding: 12px 14px; border: 1.5px solid #CFCFCB; border-radius: 8px; background: #fff; font: 400 16px/1.4 var(--font); color: var(--ink); }
+.field textarea { min-height: 88px; resize: vertical; }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--red); }
+.hint { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.err { margin: 6px 0 0; color: var(--red); font-size: 14px; font-weight: 500; }
+.err:empty { display: none; }
+.check { display: flex; gap: 10px; align-items: flex-start; margin: 6px 0 4px; font-size: 15px; line-height: 1.45; cursor: pointer; }
+.check input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--ink); }
+.check .linkbtn { text-decoration: underline; text-underline-offset: 3px; }
+.order .btn { margin-top: 16px; }
+.done { padding: 40px 0; text-align: center; }
+.done h3 { margin: 0 0 10px; font-size: 26px; }
+.done p { margin: 0 0 16px; }
+.done .note { margin: 0 auto 24px; max-width: 30em; }
+
+.doc { width: min(760px, calc(100% - 32px)); max-height: calc(100dvh - 32px); border-radius: 12px; overflow: auto; }
+.doc[open] { animation: rise .22s ease-out; }
+.doc__body { padding: 40px 40px 32px; font-size: 16px; }
+.doc__body h2 { margin: 0 0 8px; padding-right: 44px; font-size: 28px; }
+.doc__body h3 { margin: 24px 0 6px; font-size: 18px; }
+.doc__body p, .doc__body li { color: #333; }
+.doc__notice { margin: 8px 0 20px; padding: 10px 14px; border-radius: 8px; background: #FFF6CC; font-size: 15px; }
+
+/* ===== Адаптив ===== */
+@media (max-width: 900px) {
+  .card { flex-basis: calc((100% - 40px) / 2); }
+  .info3 { grid-template-columns: 1fr; gap: 28px; max-width: 520px; }
+}
+@media (max-width: 760px) {
+  .pmodal { grid-template-columns: 1fr; }
+  .pmodal__media { padding: 24px; }
+  .pmodal__media img { max-height: 56vh; }
+  .pmodal__info { padding: 24px 20px 28px; }
+  .doc__body { padding: 28px 20px 24px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .header__logo img { width: 88px; height: 88px; }
+  .nav ul { gap: 0 18px; padding-block: 6px; }
+  .intro { padding-top: 48px; }
+  .section { padding: 56px 0; }
+  .catalog { padding-top: 40px; }
+  .grid { gap: 52px; }
+  .card { flex-basis: 100%; }
+  .card .btn { width: 100%; }
+  .modal, .doc { width: 100%; max-height: 100dvh; height: 100dvh; border-radius: 0; }
+  .pmodal .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#catalog">Перейти к товарам</a>
+
+<header class="header" id="top">
+  <a class="header__logo" href="#top" aria-label="Тёплый знак — наверх">
+    <picture>
+      <source srcset="assets/img/logo.webp" type="image/webp">
+      <img src="assets/img/logo.png" width="200" height="200" alt="Тёплый знак">
+    </picture>
+  </a>
+  <nav class="nav" aria-label="Разделы">
+    <ul>
+      <li><a href="#catalog">Каталог</a></li>
+      <li><a href="#about">О магазине</a></li>
+      <li><a href="#delivery">Доставка</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="intro">
+    <div class="wrap">
+      <h1>Авторские открытки и&nbsp;сборник анекдотов для&nbsp;тех, кто любит дарить нечто большее, чем просто вещь</h1>
+    </div>
+  </section>
+
+  <section class="section catalog" id="catalog" aria-labelledby="catalog-title">
+    <div class="wrap">
+      <h2 class="sr-only" id="catalog-title">Каталог</h2>
+      <ul class="grid" data-grid></ul>
+      <noscript>
+        <p style="text-align:center">Котики “С днём рождения” — 1 500 ₽ · Фруктовый кот — 1 500 ₽ · Череп — 1 500 ₽ · Дядя Вова — 1 500 ₽ · Сборник анекдотов — 1 100 ₽. Чтобы оформить заказ, включите JavaScript или напишите на hello@teplyznak.ru.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 class="section__title" id="about-title">О магазине</h2>
+      <div class="section__text">
+        <p>«Тёплый знак» — это небольшой проект с&nbsp;открытками и&nbsp;текстами, у&nbsp;которых есть голос. Здесь нет универсальных поздравлений на&nbsp;все случаи жизни. Зато есть печатные вещи, которые можно вручить вовремя, невовремя или вообще без&nbsp;повода.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="delivery" aria-labelledby="delivery-title">
+    <div class="wrap">
+      <h2 class="section__title" id="delivery-title">Доставка и&nbsp;оплата</h2>
+      <div class="info3">
+        <div>
+          <h3>Доставка</h3>
+          <p>Отправляем заказы по&nbsp;всей России через Ozon Доставку — в&nbsp;удобный вам пункт выдачи Ozon.</p>
+        </div>
+        <div>
+          <h3>Стоимость</h3>
+          <p>Стоимость доставки рассчитывается отдельно и&nbsp;зависит от&nbsp;города и&nbsp;пункта выдачи.</p>
+        </div>
+        <div>
+          <h3>Оплата</h3>
+          <p>Банковской картой или через СБП после оформления заказа. Мы&nbsp;свяжемся с&nbsp;вами, чтобы подтвердить детали.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" aria-labelledby="contacts-title">
+    <div class="wrap">
+      <h2 class="section__title" id="contacts-title">Контакты</h2>
+      <!-- TODO(content): заменить заглушки на настоящие контакты -->
+      <ul class="contacts">
+        <li><span>Почта</span><a href="mailto:hello@teplyznak.ru">hello@teplyznak.ru</a></li>
+        <li><span>Telegram</span><a href="https://t.me/username" target="_blank" rel="noopener">@username</a></li>
+        <li><span>VK</span><a href="https://vk.com/username" target="_blank" rel="noopener">vk.com/username</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 class="section__title" id="faq-title">Вопросы и&nbsp;ответы</h2>
+      <div class="faq">
+        <details>
+          <summary>Какие товары есть в&nbsp;наличии?</summary>
+          <p>Сейчас в&nbsp;каталоге четыре открытки и&nbsp;сборник анекдотов. Все товары представлены в&nbsp;готовом виде и&nbsp;доступны для&nbsp;заказа при&nbsp;наличии тиража.</p>
+        </details>
+        <details>
+          <summary>Можно ли заказать несколько товаров сразу?</summary>
+          <p>Да. Добавьте в&nbsp;корзину любые открытки и&nbsp;сборник в&nbsp;нужном количестве и&nbsp;оформите один общий заказ.</p>
+        </details>
+        <details>
+          <summary>Можно ли изменить текст или дизайн открытки?</summary>
+          <p>Пока нет. Мы&nbsp;продаём только готовые открытки с&nbsp;фиксированными дизайнами. Индивидуальный дизайн и&nbsp;персонализация не&nbsp;предусмотрены.</p>
+        </details>
+        <details>
+          <summary>Как осуществляется доставка?</summary>
+          <p>Мы&nbsp;отправляем заказы через Ozon Доставку. При&nbsp;оформлении укажите город и&nbsp;удобный пункт выдачи Ozon. Детали доставки уточняются во&nbsp;время оформления заказа или после него.</p>
+        </details>
+        <details>
+          <summary>Сколько стоит доставка?</summary>
+          <p>Стоимость Ozon Доставки рассчитывается отдельно и&nbsp;зависит от&nbsp;города и&nbsp;выбранного пункта выдачи.</p>
+        </details>
+        <details>
+          <summary>Как оплатить заказ?</summary>
+          <p>Банковской картой или через СБП после оформления заказа.</p>
+        </details>
+        <details>
+          <summary>Можно ли вернуть товар?</summary>
+          <!-- TODO(content): условия возврата утверждает владелец магазина -->
+          <p>Возврат — в&nbsp;соответствии с&nbsp;законодательством РФ. Если с&nbsp;заказом что-то не&nbsp;так, напишите на&nbsp;hello@teplyznak.ru — разберёмся.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <picture>
+      <source srcset="assets/img/logo.webp" type="image/webp">
+      <img src="assets/img/logo.png" width="200" height="200" alt="">
+    </picture>
+    <p>© 2026 Тёплый знак</p>
+    <p class="footer__links">
+      <button class="linkbtn" type="button" data-doc="privacy">Политика конфиденциальности</button>
+      <button class="linkbtn" type="button" data-doc="offer">Публичная оферта</button>
+    </p>
+  </div>
+</footer>
+
+<!-- Плавающая кнопка корзины: появляется, когда в корзине что-то есть -->
+<button class="fab" type="button" data-cart-open hidden aria-label="Открыть корзину">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  <span class="fab__count" data-count>0</span>
+</button>
+
+<!-- Окно товара -->
+<dialog class="modal" id="product-dialog" aria-labelledby="pm-title">
+  <button class="close" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="pmodal">
+    <div class="pmodal__media" data-pm-media><img data-pm-img alt=""></div>
+    <div class="pmodal__info">
+      <p class="pmodal__type" data-pm-type></p>
+      <h2 class="pmodal__title" id="pm-title" data-pm-title></h2>
+      <p class="pmodal__price" data-pm-price></p>
+      <div class="pmodal__desc" data-pm-desc></div>
+      <button class="btn" type="button" data-pm-add>В корзину</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Корзина и оформление заказа -->
+<dialog class="panel" id="cart-dialog" aria-labelledby="cart-title">
+  <div class="panel__head">
+    <picture>
+      <source srcset="assets/img/logo.webp" type="image/webp">
+      <img src="assets/img/logo.png" width="200" height="200" alt="">
+    </picture>
+    <h2 id="cart-title">Корзина</h2>
+    <button class="close" type="button" data-close aria-label="Закрыть корзину"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="panel__body">
+    <div class="empty" data-empty hidden>
+      <p>Корзина пока пустая.</p>
+      <button class="btn btn--ghost" type="button" data-to-catalog>Смотреть товары</button>
+    </div>
+    <div data-filled>
+      <ul class="lines" data-lines></ul>
+      <p class="sum"><span>Итого</span><span data-total></span></p>
+      <p class="note">Стоимость доставки рассчитывается отдельно.</p>
+
+      <form class="order" id="order-form" novalidate>
+        <h3>Оформление заказа</h3>
+        <div class="field">
+          <label for="f-name">Имя</label>
+          <input id="f-name" name="name" autocomplete="name" aria-describedby="e-name">
+          <p class="err" id="e-name"></p>
+        </div>
+        <div class="field">
+          <label for="f-phone">Телефон</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" aria-describedby="e-phone">
+          <p class="err" id="e-phone"></p>
+        </div>
+        <div class="field">
+          <label for="f-city">Город</label>
+          <input id="f-city" name="city" autocomplete="address-level2" aria-describedby="e-city">
+          <p class="err" id="e-city"></p>
+        </div>
+        <div class="field">
+          <label for="f-pickup">Пункт выдачи Ozon</label>
+          <!-- TODO(ozon): заменить поле на виджет выбора пункта выдачи Ozon Доставки -->
+          <input id="f-pickup" name="pickup" aria-describedby="h-pickup e-pickup">
+          <p class="hint" id="h-pickup">Адрес или название пункта</p>
+          <p class="err" id="e-pickup"></p>
+        </div>
+        <div class="field">
+          <label for="f-comment">Комментарий <span class="note">(необязательно)</span></label>
+          <textarea id="f-comment" name="comment" maxlength="500"></textarea>
+        </div>
+        <label class="check">
+          <input type="checkbox" name="consent" aria-describedby="e-consent">
+          <span>Согласен(на) на&nbsp;обработку персональных данных по&nbsp;<button class="linkbtn" type="button" data-doc="privacy">политике конфиденциальности</button></span>
+        </label>
+        <p class="err" id="e-consent"></p>
+        <button class="btn btn--wide" type="submit">Оформить заказ</button>
+      </form>
+    </div>
+    <div class="done" data-done hidden tabindex="-1">
+      <h3>Спасибо! Заказ оформлен</h3>
+      <p>Мы&nbsp;свяжемся с&nbsp;вами по&nbsp;телефону, чтобы подтвердить заказ, доставку и&nbsp;оплату.</p>
+      <!-- TODO(forms): убрать эту строку, когда заказы начнут отправляться -->
+      <p class="note">Сейчас сайт работает в&nbsp;демо-режиме: заказ никуда не&nbsp;отправляется.</p>
+      <button class="btn btn--ghost" type="button" data-close>Вернуться на&nbsp;сайт</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Документы: политика и оферта -->
+<dialog class="doc" id="doc-dialog" aria-labelledby="doc-title">
+  <button class="close" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="doc__body" data-doc-body></div>
+</dialog>
+
+<script>
+(function () {
+'use strict'
+
+/* ===== Настройки ===== */
+var CONFIG = {
+  email: 'hello@teplyznak.ru',
+  // TODO(forms): адрес, куда отправлять заказы (свой сервер, CRM, сервис форм или Telegram-бот).
+  // Пока null — заказ показывает экран «Спасибо» и никуда не уходит.
+  orderEndpoint: null,
+  storageKey: 'tz_cart_v2',
+  qtyMax: 99
+}
+
+/* ===== Товары =====
+   TODO(images): картинки лежат в assets/img/; width/height — реальный размер файла.
+   Чтобы поменять цену, текст или картинку, достаточно поправить этот список. */
+var PRODUCTS = [
+  {
+    id: 'kotiki', type: 'Открытка', title: 'Котики “С днём рождения”', price: 1500, photo: true,
+    short: 'Открытка для дня рождения, когда обычного “поздравляю” недостаточно.',
+    desc: [
+      'Три котёнка отмечают как положено: у двоих на головах торты со свечками, третий — в праздничном колпаке, круглых очках и с дудкой. Вокруг шары, конфетти и подарки, а сверху крупно: «С днём рождения!»',
+      'Для мамы, подруги, коллеги и всех, кто делает вид, что к котикам равнодушен.'
+    ],
+    img: 'assets/img/card-kotiki.webp', w: 1121, h: 1403,
+    alt: 'Открытка «Котики “С днём рождения”»: на пастельном радужном фоне надпись «С днём рождения!» и три котёнка с тортами, шарами и подарками'
+  },
+  {
+    id: 'fruktovyy-kot', type: 'Открытка', title: 'Фруктовый кот', price: 1500,
+    short: 'Кот, фрукты и немного хорошего настроения — без лишних объяснений.',
+    desc: [
+      'На сиреневом фоне кот в плюшевой шапке-винограде показывает язык и держит крошечный букет. Над ним — «Поздравляю!!»: два восклицательных знака, потому что одного явно мало.',
+      'Для дня рождения, новой работы, сданного экзамена или просто пятницы.'
+    ],
+    img: 'assets/img/card-fruktovyy-kot.webp', w: 858, h: 1223,
+    alt: 'Открытка «Фруктовый кот»: на сиреневом фоне кот в плюшевой шапке-винограде держит маленький букет, сверху надпись «Поздравляю!!»'
+  },
+  {
+    id: 'cherep', type: 'Открытка', title: 'Череп', price: 1500,
+    short: 'Для тех, кому нравятся подарки с характером.',
+    desc: [
+      'Скелет с горящими глазами стоит посреди огня и цепей и держит букет чёрных цветов. Сверху готическими буквами — «Скажи подвал!»',
+      'Для тех, кто на слово «мило» закатывает глаза. Цветы, кстати, есть — просто в его стиле.'
+    ],
+    img: 'assets/img/card-cherep.webp', w: 880, h: 1079,
+    alt: 'Открытка «Череп»: мультяшный скелет с букетом чёрных цветов на фоне огня и цепей, сверху надпись «Скажи подвал!»'
+  },
+  {
+    id: 'dyadya-vova', type: 'Открытка', title: 'Дядя Вова', price: 1500,
+    short: 'Открытка с настроением, которое сложно перепутать с чем-то другим.',
+    desc: [
+      'Мужчина в меховой шапке и длинной шубе сидит на стуле с видом человека, который уже всё решил. Сверху разноцветными буквами — «Чемодан, вокзал…», фон — чёрная меловая доска.',
+      'Для проводов в отпуск, переезда или новой работы.'
+    ],
+    img: 'assets/img/card-dyadya-vova.webp', w: 857, h: 1223,
+    alt: 'Открытка «Дядя Вова»: на фоне чёрной меловой доски мужчина в меховой шапке и шубе сидит на стуле, сверху надпись «Чемодан, вокзал…»'
+  },
+  {
+    id: 'sbornik', type: 'Сборник анекдотов', title: 'Сборник анекдотов', price: 1100,
+    short: 'Сборник анекдотов для чтения в дороге, на кухне, в очереди и между важными делами.',
+    desc: [
+      'Ярко-жёлтая обложка и нарисованное от руки лицо — ровно с таким выражением обычно слушают концовку хорошего анекдота.',
+      'Для того, кто любит травить анекдоты за столом, и для того, кто пока только учится.'
+    ],
+    img: 'assets/img/book-anekdoty.webp', w: 614, h: 945,
+    alt: 'Сборник анекдотов: жёлтая обложка с надписью «Сборник анекдотов — для рассказа в приятной компании» и нарисованным от руки лицом'
+  }
+]
+
+/* ===== Помощники ===== */
+function $ (s, r) { return (r || document).querySelector(s) }
+function $$ (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+function byId (id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) return PRODUCTS[i]; return null }
+function esc (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+var NF = new Intl.NumberFormat('ru-RU')
+function price (n) { return NF.format(n).replace(/\s/g, ' ') + ' ₽' }
+var store = {
+  get: function () { try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) } catch (e) { return null } },
+  set: function (v) { try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(v)) } catch (e) {} }
+}
+
+/* ===== Каталог ===== */
+$('[data-grid]').innerHTML = PRODUCTS.map(function (p, i) {
+  return '<li class="card">' +
+    '<button class="card__media' + (p.photo ? ' card__media--photo' : '') + '" type="button" data-open="' + p.id + '">' +
+      '<img src="' + p.img + '" width="' + p.w + '" height="' + p.h + '" alt="' + esc(p.alt) + '" loading="' + (i < 3 ? 'eager' : 'lazy') + '" decoding="async">' +
+    '</button>' +
+    '<h3 class="card__title"><button class="linkbtn" type="button" data-open="' + p.id + '">' + esc(p.title) + '</button></h3>' +
+    '<p class="card__text">' + esc(p.short) + '</p>' +
+    '<div class="card__buy"><p class="card__price">' + price(p.price) + '</p>' +
+      '<button class="btn" type="button" data-add="' + p.id + '">В корзину</button></div>' +
+  '</li>'
+}).join('')
+
+/* ===== Окна ===== */
+function openDialog (d) { if (!d.open) d.showModal() }
+$$('dialog').forEach(function (d) {
+  d.addEventListener('click', function (e) {
+    if (e.target === d || e.target.closest('[data-close]')) d.close()   // клик по фону или по кнопке «Закрыть»
+  })
+})
+
+/* Окно товара */
+var pm = $('#product-dialog')
+function openProduct (id) {
+  var p = byId(id); if (!p) return
+  var img = $('[data-pm-img]', pm)
+  img.src = p.img; img.width = p.w; img.height = p.h; img.alt = p.alt
+  $('[data-pm-media]', pm).classList.toggle('pmodal__media--photo', !!p.photo)
+  $('[data-pm-type]', pm).textContent = p.type
+  $('[data-pm-title]', pm).textContent = p.title
+  $('[data-pm-price]', pm).textContent = price(p.price)
+  $('[data-pm-desc]', pm).innerHTML = p.desc.map(function (t) { return '<p>' + esc(t) + '</p>' }).join('')
+  var add = $('[data-pm-add]', pm)
+  add.setAttribute('data-add', p.id)
+  add.classList.remove('is-added'); add.textContent = 'В корзину'
+  openDialog(pm)
+  pm.scrollTop = 0
+}
+
+/* Документы */
+// TODO(content): юридические тексты — шаблоны; заполнить данные в [скобках] и согласовать с юристом
+var DOCS = {
+  privacy: '<h2 id="doc-title">Политика конфиденциальности</h2>' +
+    '<p class="doc__notice">Шаблон. Перед запуском замените данные в [скобках] и согласуйте текст с юристом.</p>' +
+    '<h3>1. Общие положения</h3><p>Эта политика описывает, как [Наименование продавца], [ИНН/ОГРНИП], адрес: [Адрес] (далее — «Оператор») обрабатывает персональные данные покупателей магазина «Тёплый знак». Политика составлена в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных». Оформляя заказ на сайте, вы соглашаетесь с этой политикой.</p>' +
+    '<h3>2. Какие данные мы получаем</h3><p>При оформлении заказа — имя, телефон, город, пункт выдачи Ozon и комментарий к заказу.</p>' +
+    '<h3>3. Зачем мы их используем</h3><p>Чтобы оформить, оплатить и доставить заказ и связаться с вами по нему.</p>' +
+    '<h3>4. Кому мы передаём данные</h3><p>Ozon Доставке — в объёме, нужном для доставки заказа; платёжному сервису [название] — для проведения оплаты. Шрифты сайта загружаются с серверов Google Fonts, при этом передаётся IP-адрес. Другим лицам данные не передаются, кроме случаев, предусмотренных законодательством РФ.</p>' +
+    '<h3>5. Хранение и защита</h3><p>Оператор хранит данные [срок хранения] и принимает меры для их защиты.</p>' +
+    '<h3>6. Ваши права</h3><p>Вы можете запросить сведения о своих данных, потребовать их уточнения или удаления и отозвать согласие на обработку. Для этого напишите на ' + esc(CONFIG.email) + '.</p>' +
+    '<h3>7. Контакты оператора</h3><p>[Наименование продавца], [ИНН/ОГРНИП], [Адрес], ' + esc(CONFIG.email) + '</p>',
+  offer: '<h2 id="doc-title">Публичная оферта</h2>' +
+    '<p class="doc__notice">Шаблон. Перед запуском замените данные в [скобках] и согласуйте текст с юристом.</p>' +
+    '<h3>1. Общие положения</h3><p>Этот документ — публичная оферта [Наименование продавца], [ИНН/ОГРНИП], адрес: [Адрес] (далее — «Продавец») о продаже товаров с сайта на условиях ниже (ст. 437 Гражданского кодекса РФ). Договор считается заключённым с момента [оформления или оплаты заказа]. К отношениям сторон применяется законодательство РФ, в том числе Закон РФ «О защите прав потребителей».</p>' +
+    '<h3>2. Товары</h3><p>Продавец продаёт готовые товары из каталога сайта: открытки и сборник анекдотов. Дизайн и текст товаров по запросу покупателя не меняются.</p>' +
+    '<h3>3. Цена и оплата</h3><p>Цены указаны на сайте в рублях. Стоимость доставки не входит в цену товара и рассчитывается отдельно. Оплата — банковской картой или через СБП после оформления заказа.</p>' +
+    '<h3>4. Доставка</h3><p>Товары доставляются через Ozon Доставку в пункт выдачи Ozon, указанный покупателем. Стоимость и сроки доставки: [указать порядок].</p>' +
+    '<h3>5. Возврат</h3><p>Возврат товара — в соответствии с законодательством РФ. [Порядок возврата — указать.]</p>' +
+    '<h3>6. Реквизиты продавца</h3><p>[Наименование продавца], [ИНН/ОГРНИП], [Адрес], ' + esc(CONFIG.email) + '</p>'
+}
+var docDialog = $('#doc-dialog')
+function openDoc (name) {
+  $('[data-doc-body]', docDialog).innerHTML = DOCS[name] || ''
+  openDialog(docDialog)
+  docDialog.scrollTop = 0
+}
+
+/* ===== Корзина ===== */
+var cart = (function sanitize (v) {
+  var out = []
+  if (!Array.isArray(v)) return out
+  v.forEach(function (l) {
+    if (!l || !byId(l.id) || out.some(function (o) { return o.id === l.id })) return
+    out.push({ id: l.id, qty: Math.min(CONFIG.qtyMax, Math.max(1, parseInt(l.qty, 10) || 1)) })
+  })
+  return out
+})(store.get())
+
+function count () { return cart.reduce(function (s, l) { return s + l.qty }, 0) }
+function total () { return cart.reduce(function (s, l) { return s + byId(l.id).price * l.qty }, 0) }
+function line (id) { for (var i = 0; i < cart.length; i++) if (cart[i].id === id) return cart[i]; return null }
+function save () { store.set(cart); render() }
+function add (id) {
+  var l = line(id)
+  if (l) l.qty = Math.min(CONFIG.qtyMax, l.qty + 1)
+  else cart.push({ id: id, qty: 1 })
+  save()
+}
+function setQty (id, q) {
+  if (q < 1) cart = cart.filter(function (l) { return l.id !== id })
+  else { var l = line(id); if (l) l.qty = Math.min(CONFIG.qtyMax, q) }
+  save()
+}
+
+var fab = $('[data-cart-open]')
+var cartDialog = $('#cart-dialog')
+function render () {
+  var n = count()
+  fab.hidden = n === 0
+  $('[data-count]', fab).textContent = n
+  fab.setAttribute('aria-label', 'Открыть корзину, товаров: ' + n)
+
+  // запоминаем, на какой кнопке был фокус, чтобы вернуть его после перерисовки
+  var a = document.activeElement
+  var keep = a && a.closest && a.closest('[data-lines]') ? a.getAttribute('data-act') + '|' + a.getAttribute('data-id') : null
+
+  $('[data-lines]', cartDialog).innerHTML = cart.map(function (l) {
+    var p = byId(l.id)
+    return '<li class="line">' +
+      '<img class="line__img" src="' + p.img + '" width="' + p.w + '" height="' + p.h + '" alt="">' +
+      '<p class="line__title">' + esc(p.title) + '</p>' +
+      '<button class="linkbtn line__remove" type="button" data-act="remove" data-id="' + p.id + '" aria-label="Удалить: ' + esc(p.title) + '">Удалить</button>' +
+      '<p class="line__price">' + price(p.price) + ' × ' + l.qty + '</p>' +
+      '<div class="qty">' +
+        '<button type="button" data-act="dec" data-id="' + p.id + '" aria-label="Уменьшить количество: ' + esc(p.title) + '"' + (l.qty <= 1 ? ' disabled' : '') + '>−</button>' +
+        '<output aria-live="polite">' + l.qty + '</output>' +
+        '<button type="button" data-act="inc" data-id="' + p.id + '" aria-label="Увеличить количество: ' + esc(p.title) + '"' + (l.qty >= CONFIG.qtyMax ? ' disabled' : '') + '>+</button>' +
+      '</div>' +
+    '</li>'
+  }).join('')
+  $('[data-total]', cartDialog).textContent = price(total())
+
+  var done = !$('[data-done]', cartDialog).hidden
+  $('[data-empty]', cartDialog).hidden = n > 0 || done
+  $('[data-filled]', cartDialog).hidden = n === 0 || done
+
+  if (keep) {
+    var parts = keep.split('|')
+    var el = $('[data-act="' + parts[0] + '"][data-id="' + parts[1] + '"]', cartDialog)
+    if (el && !el.disabled) el.focus()
+    else { var first = $('[data-lines] button:not(:disabled)', cartDialog); (first || $('[data-close]', cartDialog)).focus() }
+  }
+}
+
+function openCart () {
+  var done = $('[data-done]', cartDialog)
+  if (!done.hidden && count() > 0) done.hidden = true
+  render()
+  openDialog(cartDialog)
+}
+
+/* ===== Клики ===== */
+document.addEventListener('click', function (e) {
+  var t = e.target.closest('[data-add],[data-open],[data-doc],[data-cart-open],[data-act],[data-to-catalog]')
+  if (!t) return
+  if (t.hasAttribute('data-add')) {
+    add(t.getAttribute('data-add'))
+    t.classList.add('is-added'); t.textContent = 'Добавлено ✓'
+    clearTimeout(t._tm)
+    t._tm = setTimeout(function () { t.classList.remove('is-added'); t.textContent = 'В корзину' }, 1400)
+    fab.classList.remove('is-bump'); void fab.offsetWidth; fab.classList.add('is-bump')
+    track('add_to_cart', { id: t.getAttribute('data-add') })
+  } else if (t.hasAttribute('data-open')) {
+    openProduct(t.getAttribute('data-open'))
+  } else if (t.hasAttribute('data-doc')) {
+    openDoc(t.getAttribute('data-doc'))
+  } else if (t.hasAttribute('data-cart-open')) {
+    openCart()
+  } else if (t.hasAttribute('data-act')) {
+    var id = t.getAttribute('data-id'), l = line(id)
+    if (!l) return
+    var act = t.getAttribute('data-act')
+    if (act === 'inc') setQty(id, l.qty + 1)
+    else if (act === 'dec') setQty(id, l.qty - 1)
+    else setQty(id, 0)
+  } else if (t.hasAttribute('data-to-catalog')) {
+    cartDialog.close()
+    $('#catalog').scrollIntoView()
+  }
+})
+
+/* ===== Оформление заказа ===== */
+var form = $('#order-form')
+var MSG = {
+  name: 'Напишите, как к вам обращаться',
+  phone: 'Проверьте номер телефона',
+  city: 'Укажите город',
+  pickup: 'Укажите пункт выдачи Ozon',
+  consent: 'Нужно согласие на обработку данных'
+}
+// Российский номер: 11 цифр с 7 или 8 в начале, либо 10 цифр с 9 в начале → +7XXXXXXXXXX
+function normPhone (v) {
+  var d = String(v).replace(/\D/g, '')
+  if (d.length === 11 && (d[0] === '7' || d[0] === '8')) return '+7' + d.slice(1)
+  if (d.length === 10 && d[0] === '9') return '+7' + d
+  return null
+}
+function fmtPhone (p) { return '+7 ' + p.slice(2, 5) + ' ' + p.slice(5, 8) + '-' + p.slice(8, 10) + '-' + p.slice(10) }
+function setErr (name, msg) {
+  var el = form.elements[name]
+  el.setAttribute('aria-invalid', msg ? 'true' : 'false')
+  $('#e-' + name).textContent = msg || ''
+}
+function validate () {
+  var f = form.elements, bad = []
+  function check (name, ok) { setErr(name, ok ? '' : MSG[name]); if (!ok) bad.push(name) }
+  check('name', f.name.value.trim().length > 0)
+  check('phone', !!normPhone(f.phone.value))
+  check('city', f.city.value.trim().length > 0)
+  check('pickup', f.pickup.value.trim().length > 0)
+  check('consent', f.consent.checked)
+  return bad
+}
+form.elements.phone.addEventListener('blur', function () {
+  var p = normPhone(this.value); if (p) this.value = fmtPhone(p)
+})
+form.addEventListener('input', function (e) {
+  if (e.target.getAttribute('aria-invalid') === 'true') validate()
+})
+form.addEventListener('change', function (e) {
+  if (e.target.name === 'consent' && e.target.getAttribute('aria-invalid') === 'true') validate()
+})
+
+// TODO(forms): отправка заказа. TODO(payment): после подключения платёжного сервиса сервер
+// может вернуть ссылку на оплату (карта / СБП) — тогда перенаправить на неё.
+function submitOrder (payload) {
+  if (!CONFIG.orderEndpoint) return Promise.resolve({ ok: true, demo: true })
+  return fetch(CONFIG.orderEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return { ok: true } })
+}
+
+var busy = false
+form.addEventListener('submit', function (e) {
+  e.preventDefault()
+  if (busy) return
+  var bad = validate()
+  if (bad.length) { form.elements[bad[0]].focus(); return }
+  var f = form.elements
+  var payload = {
+    items: cart.map(function (l) { var p = byId(l.id); return { id: l.id, title: p.title, price: p.price, qty: l.qty } }),
+    total: total(),
+    customer: { name: f.name.value.trim(), phone: normPhone(f.phone.value), city: f.city.value.trim(), pickup: f.pickup.value.trim(), comment: f.comment.value.trim() },
+    delivery: 'Ozon Доставка'
+  }
+  busy = true
+  var btn = $('button[type="submit"]', form)
+  btn.disabled = true; btn.textContent = 'Отправляем…'
+  submitOrder(payload).then(function () {
+    track('purchase_submit', { total: payload.total })
+    cart = []; store.set(cart)
+    form.reset()
+    $$('[aria-invalid]', form).forEach(function (el) { el.setAttribute('aria-invalid', 'false') })
+    var done = $('[data-done]', cartDialog)
+    done.hidden = false
+    render()
+    done.focus()
+  }).catch(function () {
+    alertError()
+  }).then(function () {
+    busy = false; btn.disabled = false; btn.textContent = 'Оформить заказ'
+  })
+})
+function alertError () { setErr('consent', 'Не получилось отправить заказ. Проверьте интернет и попробуйте ещё раз.') }
+
+/* ===== Аналитика =====
+   TODO(analytics): когда подключите Яндекс Метрику / VK Пиксель, отправляйте события отсюда */
+function track (event, params) {
+  try { (window.dataLayer = window.dataLayer || []).push({ event: event, params: params || {} }) } catch (e) {}
+}
+
+// корзина в другой вкладке
+window.addEventListener('storage', function (e) {
+  if (e.key === CONFIG.storageKey) {
+    var v = store.get()
+    cart = Array.isArray(v) ? v.filter(function (l) { return l && byId(l.id) }) : []
+    render()
+  }
+})
+
+// после «Спасибо» следующее открытие корзины начинается с чистого листа
+cartDialog.addEventListener('close', function () { $('[data-done]', cartDialog).hidden = true; render() })
+
+render()
+})()
+</script>
+</body>
+</html>
